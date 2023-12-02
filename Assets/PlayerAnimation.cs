@@ -42,8 +42,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         _isAttack = true;
         _animator.SetInteger("NumberAttack", Random.Range(0, 2));
-        //_animator.SetTrigger("Attack");
-        _animator.SetBool("IsAttack", true);
+        _animator.SetTrigger("Attack");
+        //_animator.SetBool("IsAttack", true);
     }
 
     public void SetWalk()

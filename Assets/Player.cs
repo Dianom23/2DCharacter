@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sr;
+    private PlayerAnimation _playerAnimation;
     private float _inputMove;
     private float _activeMoveSpeed;
     private bool _isGrounded;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         _activeMoveSpeed = _speed;
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
+        _playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     private void Update()
@@ -65,7 +67,7 @@ public class Player : MonoBehaviour
 
     public void OnJump()
     {
-        if(_isGrounded == false && _currentCountJump >= _maxCountJump) return;
+        if(_isGrounded == false || _currentCountJump >= _maxCountJump || _playerAnimation.isAttack == true) return;
 
         _currentCountJump++;
         OnJumpEvent?.Invoke();
