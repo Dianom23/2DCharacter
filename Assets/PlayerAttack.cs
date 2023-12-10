@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     public UnityEvent OnAttackEvent = new UnityEvent();
 
     [SerializeField] private Transform _attackPositon;
+    private Vector2 attackPositon;
     [SerializeField] private float _attackRadius = 0.3f;
     [SerializeField] private float _delayAfterAttack = 0.2f;
 
@@ -34,10 +35,23 @@ public class PlayerAttack : MonoBehaviour
         //print()
 
         ResetTimerDelayAttack();
-        SetAttackPosition();
+        SetAttackPosition2();
         OnAttackEvent?.Invoke();
     }
 
+    private Vector2 SetAttackPosition2()
+    {
+        Vector2 newAttackPosition;
+
+        if (_player.sr.flipX == true)
+            newAttackPosition = new Vector2(transform.position.x - 0.5f, transform.position.y + 0.5f);
+        else
+            newAttackPosition = new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f);
+
+        attackPositon = newAttackPosition;
+        return newAttackPosition;
+
+    }
     private void SetAttackPosition()
     {
         Vector2 newAttackPosition;
@@ -67,6 +81,8 @@ public class PlayerAttack : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_attackPositon.position, _attackRadius);
+        //Gizmos.DrawWireSphere(_attackPositon.position, _attackRadius);
+        Gizmos.DrawWireSphere(attackPositon, _attackRadius);
+
     }
 }

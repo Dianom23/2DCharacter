@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
 
     public void OnJump()
     {
-        if(_isGrounded == false || _currentCountJump >= _maxCountJump || _playerAnimation.isAttack == true) return;
+        if(_isGrounded == false || _currentCountJump >= _maxCountJump || _playerAnimation.isDash == true || _playerAnimation.isAttack == true) return;
 
         _currentCountJump++;
         OnJumpEvent?.Invoke();
